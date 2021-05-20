@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get } from '@nestjs/common';
 import { ProductsService } from './products.sevice';
 
 @Controller('products')
@@ -17,5 +17,9 @@ export class ProductsController {
       prodPrice,
     );
     return { id: generatedID };
+  }
+  @Get()
+  getAllProducts() {
+    return { products: this.productsService.getProducts() };
   }
 }
