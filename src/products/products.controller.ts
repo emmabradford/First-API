@@ -1,4 +1,5 @@
-import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param, Patch } from '@nestjs/common';
+import { SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG } from 'constants';
 import { ProductsService } from './products.sevice';
 
 @Controller('products')
@@ -26,5 +27,16 @@ export class ProductsController {
   @Get(':id')
   getProduct(@Param('id') i: string) {
     return { product: this.productsService.getProduct(i) };
+  }
+
+  @Patch(':id')
+  updateProduct(
+    @Param('id') i: string,
+    @Body('title') t: string,
+    @Body('description') desc: string,
+    @Body('price') p: number,
+  ) {
+    this.productsService.updateProduct(i, t, desc, p);
+    return null;
   }
 }

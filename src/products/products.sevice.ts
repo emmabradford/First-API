@@ -23,4 +23,31 @@ export class ProductsService {
     }
     return { ...productAns };
   }
+
+  updateProduct(i: string, t: string, d: string, p: number) {
+    const found = this.findProd(i);
+    const foundIndex = found[1];
+    const foundProd = found[0];
+    const newProd = { ...foundProd };
+    if (t) {
+      newProd.title = t;
+    }
+    if (d) {
+      newProd.description = d;
+    }
+    if (p) {
+      newProd.price = p;
+    }
+    this.products[foundIndex] = newProd;
+  }
+
+  private findProd(i: string): [Product, number] {
+    const productIndex = this.products.findIndex((prod) => prod.id === i);
+    const productAns = this.products[productIndex];
+
+    if (!productAns) {
+      throw new NotFoundException('Your product is missing!!');
+    }
+    return [productAns, productIndex];
+  }
 }
