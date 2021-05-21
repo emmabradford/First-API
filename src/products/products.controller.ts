@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Param, Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Param,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG } from 'constants';
 import { ProductsService } from './products.sevice';
 
@@ -37,6 +45,12 @@ export class ProductsController {
     @Body('price') p: number,
   ) {
     this.productsService.updateProduct(i, t, desc, p);
+    return null;
+  }
+
+  @Delete(':id')
+  deleteProduct(@Param('id') i: string) {
+    this.productsService.deleteProduct(i);
     return null;
   }
 }

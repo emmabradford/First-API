@@ -50,4 +50,9 @@ export class ProductsService {
     }
     return [productAns, productIndex];
   }
+
+  deleteProduct(i: string) {
+    const [product, index] = this.findProd(i);
+    this.products.splice(index, 1);
+  }
 }
