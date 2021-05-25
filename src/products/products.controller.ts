@@ -7,7 +7,6 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
-import { SSL_OP_SSLREF2_REUSE_CERT_TYPE_BUG } from 'constants';
 import { ProductsService } from './products.sevice';
 
 @Controller('products')
